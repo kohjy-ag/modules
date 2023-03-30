@@ -1,0 +1,9 @@
+- name: concatmito concatmito test_concatmito_concatmito
+  command: nextflow run ./tests/modules/nf-core/concatmito/concatmito -entry test_concatmito_concatmito -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/concatmito/concatmito/nextflow.config
+  tags:
+    - concatmito/concatmito
+    - concatmito
+  files:
+    - path: output/concatmito/reference_database.fa
+      md5sum: c23a2490c6e25b081dceeb07f54e4dbf
+    - path: output/concatmito/versions.yml

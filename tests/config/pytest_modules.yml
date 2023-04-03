@@ -2158,6 +2158,10 @@ minimap2/index:
   - modules/nf-core/minimap2/index/**
   - tests/modules/nf-core/minimap2/index/**
 
+minimap2/minimap2:
+  - modules/nf-core/minimap2/minimap2/**
+  - tests/modules/nf-core/minimap2/minimap2/**
+
 miniprot/align:
   - modules/miniprot/align/**
   - tests/modules/miniprot/align/**

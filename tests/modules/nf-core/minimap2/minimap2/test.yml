@@ -1,0 +1,9 @@
+- name: minimap2 minimap2 test_minimap2_minimap2
+  command: nextflow run ./tests/modules/nf-core/minimap2/minimap2 -entry test_minimap2_minimap2 -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/minimap2/minimap2/nextflow.config
+  tags:
+    - minimap2/minimap2
+    - minimap2
+  files:
+    - path: output/minimap2/reference_genome.mmi
+      md5sum: e9b9258bc215925690c7bbb011019965
+    - path: output/minimap2/versions.yml

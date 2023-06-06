@@ -698,6 +698,10 @@ cnvkit/target:
   - modules/nf-core/cnvkit/target/**
   - tests/modules/nf-core/cnvkit/target/**
 
+concatmito/concatmito:
+  - modules/nf-core/concatmito/concatmito/**
+  - tests/modules/nf-core/concatmito/concatmito/**
+
 concoct/concoct:
   - modules/nf-core/concoct/concoct/**
   - tests/modules/nf-core/concoct/concoct/**

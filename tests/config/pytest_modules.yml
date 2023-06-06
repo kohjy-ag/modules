@@ -2867,6 +2867,10 @@ samtools/view:
   - modules/nf-core/samtools/view/**
   - tests/modules/nf-core/samtools/view/**
 
+samtoolspostprocessing/samtoolspostprocessing:
+  - modules/nf-core/samtoolspostprocessing/samtoolspostprocessing/**
+  - tests/modules/nf-core/samtoolspostprocessing/samtoolspostprocessing/**
+
 scoary:
   - modules/nf-core/scoary/**
   - tests/modules/nf-core/scoary/**

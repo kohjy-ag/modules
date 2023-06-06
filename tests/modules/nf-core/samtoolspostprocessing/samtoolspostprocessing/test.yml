@@ -1,0 +1,9 @@
+- name: samtoolspostprocessing samtoolspostprocessing test_samtoolspostprocessing_samtoolspostprocessing
+  command: nextflow run ./tests/modules/nf-core/samtoolspostprocessing/samtoolspostprocessing -entry test_samtoolspostprocessing_samtoolspostprocessing -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/samtoolspostprocessing/samtoolspostprocessing/nextflow.config
+  tags:
+    - samtoolspostprocessing
+    - samtoolspostprocessing/samtoolspostprocessing
+  files:
+    - path: output/samtoolspostprocessing/abc_results
+      md5sum: 3f9cb9264e27f2c7733433e62d635bd1
+    - path: output/samtoolspostprocessing/versions.yml

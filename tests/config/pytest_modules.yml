@@ -2871,6 +2871,10 @@ samtools/view:
   - modules/nf-core/samtools/view/**
   - tests/modules/nf-core/samtools/view/**
 
+samtoolsall/samtoolsall:
+  - modules/nf-core/samtoolsall/samtoolsall/**
+  - tests/modules/nf-core/samtoolsall/samtoolsall/**
+
 samtoolspostprocessing/samtoolspostprocessing:
   - modules/nf-core/samtoolspostprocessing/samtoolspostprocessing/**
   - tests/modules/nf-core/samtoolspostprocessing/samtoolspostprocessing/**

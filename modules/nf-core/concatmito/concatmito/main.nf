@@ -29,6 +29,11 @@ process CONCATMITO_CONCATMITO {
 //        'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
 
+    // create a subfolder structure in results folder - basic structure declared in nextflow.config
+        // a couple of syntax error corrected herein
+    //publishDir path: "./results/concatmito", mode:'copy', pattern: 'reference_database.fa'
+
+
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
     //               MUST be provided as an input via a Groovy Map called "meta".
@@ -40,7 +45,7 @@ process CONCATMITO_CONCATMITO {
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    path('reference_database.fa'), emit: fa
+    tuple val(meta), path('reference_database.fa'), emit: fa
     // TODO nf-core: List additional required output channels/values here
     path "versions.yml"           , emit: versions
 
@@ -60,7 +65,7 @@ process CONCATMITO_CONCATMITO {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    ~/concat_mito.py --fasta ${fasta} > reference_database.fa
+    /home/ubuntu/concat_mito.py --fasta ${fasta} > reference_database.fa
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

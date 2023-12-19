@@ -35,11 +35,11 @@ process HISTOGRAM_HISTOGRAM {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), val(sample_id), path(allstats), path(nosecsuppstats)
+    tuple val(meta), path(allstats), path(nosecsuppstats)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), val(sample_id), path('*_all_stats_histogram.png'), path('*_no_sec_supp_stats_histogram.png'), path('*_no_sec_supp_stats_histogram_log.png'), path('*_all_stats_histogram_log.png'), emit: png
+    tuple val(meta), path('*_all_stats_histogram.png'), path('*_no_sec_supp_stats_histogram.png'), path('*_no_sec_supp_stats_histogram_log.png'), path('*_all_stats_histogram_log.png'), emit: png
     tuple path('*_all_stats.csv'), path('*_no_sec_supp_stats.csv'), emit: csv
     // TODO nf-core: List additional required output channels/values here
     path "versions.yml"           , emit: versions
@@ -59,8 +59,10 @@ process HISTOGRAM_HISTOGRAM {
     //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
+
     """
-    ~/Distribution.r ${sample_id} ${allstats} ${nosecsuppstats}
+    ln -s ${nosecsuppstats} ${meta.id}${nosecsuppstats}
+    ~/Distribution.r ${meta.id} ${allstats} ${meta.id}${nosecsuppstats}
 
 
     cat <<-END_VERSIONS > versions.yml

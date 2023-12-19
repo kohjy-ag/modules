@@ -1,0 +1,13 @@
+## TODO nf-core: Please run the following command to build this file:
+#                nf-core modules create-test-yml /samtoolsall
+- name: "samtoolsall samtoolsall"
+  command: nextflow run ./tests/modules/nf-core/samtoolsall/samtoolsall -entry test_samtoolsall_samtoolsall -c ./tests/config/nextflow.config
+  tags:
+    - "samtoolsall"
+    - "samtoolsall/samtoolsall"
+  files:
+    - path: "output/samtoolsall/test.bam"
+      md5sum: e667c7caad0bc4b7ac383fd023c654fc
+    - path: "output/samtoolsall/versions.yml"
+      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b
+    

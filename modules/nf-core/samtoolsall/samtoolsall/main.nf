@@ -15,7 +15,7 @@
 // TODO nf-core: Optional inputs are not currently supported by Nextflow. However, using an empty
 //               list (`[]`) instead of a file can be used to work around this issue.
 
-process SAMTOOLSPOSTPROCESSING_SAMTOOLSPOSTPROCESSING {
+process SAMTOOLSALL_SAMTOOLSALL {
     tag "$meta.id"
     label 'process_single'
 
@@ -23,10 +23,10 @@ process SAMTOOLSPOSTPROCESSING_SAMTOOLSPOSTPROCESSING {
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-    // conda "YOUR-TOOL-HERE"
-    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-    //    'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-    //    'quay.io/biocontainers/YOUR-TOOL-HERE' }"
+    conda "YOUR-TOOL-HERE"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
 
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
@@ -35,11 +35,11 @@ process SAMTOOLSPOSTPROCESSING_SAMTOOLSPOSTPROCESSING {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(stats), path(flagstat), path(idxstats)
+    tuple val(meta), path(sorted_bam),path(no_sec_supp_bam)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), file("*_results"),file("*.stats")
+    tuple val(meta), path("*_all_stats.txt"), path("*_no_sec_supp_stats.txt") , emit: txt
     // TODO nf-core: List additional required output channels/values here
     path "versions.yml"           , emit: versions
 
@@ -59,12 +59,28 @@ process SAMTOOLSPOSTPROCESSING_SAMTOOLSPOSTPROCESSING {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    grep ^SN ${stats} | cut -f 2- > ${meta.id}${meta.id}.stats
-    ~/samtools_postprocessing.sh ${meta.id} ${meta.id}${meta.id}.stats ${flagstat} ${idxstats} 
 
+    bash /home/ubuntu/samtools_all.sh ${meta.id} $sorted_bam $no_sec_supp_bam
+    
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        samtoolspostprocessing: 
+        : \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//' ))
     END_VERSIONS
     """
+
+//    stub:
+//    def args = task.ext.args ?: ''
+//    def prefix = task.ext.prefix ?: "${meta.id}"
+//    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
+//    //               Have a look at the following examples:
+//    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
+//    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
+//    """
+//    touch ${prefix}.bam
+//
+//    cat <<-END_VERSIONS > versions.yml
+//    "${task.process}":
+//        : \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//' ))
+//   END_VERSIONS
+//    """
 }

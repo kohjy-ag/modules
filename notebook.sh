@@ -1,0 +1,1 @@
+ nextflow run main.nf -c "modules.config" --outdir "/home/ubuntu/MITOSEQ/modules/results/" --publish_dir_mode "copy" --sequencing_type "Nanopore" --sample "test123" --reads "/mnt/volume1/test123_{1,2}.fasta" 

@@ -1,0 +1,20 @@
+#!/usr/bin/env nextflow
+
+nextflow.enable.dsl = 2
+
+include { EMIRGE_EMIRGE } from '../../../../modules/emirge/emirge/main.nf'
+
+workflow test_emirge_emirge {
+    
+    input = [
+        [ id:'test' ], // meta map
+        "sample",
+        file("/home/ubuntu/R1.flt.trimmed.fastq", checkIfExists: true),
+        file("/home/ubuntu/R2.flt.trimmed.fastq", checkIfExists: true),
+        151,200,40,10,
+        file("/home/ubuntu/SILVA_138.1_SSURef_NR99_tax_silva_trunc.ge800bp.le3500bp.0.97.fixed.fasta",checkIfExists: true),
+        "/home/ubuntu/SILVA_138.1_SSURef_NR99_tax_silva_trunc.ge800bp.le3500bp.0.97.fixed"
+    ]
+
+    EMIRGE_EMIRGE ( input )
+}

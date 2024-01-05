@@ -1,0 +1,8 @@
+- name: emirge emirge test_emirge_emirge
+  command: nextflow run ./tests/modules/emirge/emirge -entry test_emirge_emirge -c ./tests/config/nextflow.config  -c ./tests/modules/emirge/emirge/nextflow.config
+  tags:
+  - emirge/emirge
+  - emirge
+  files:
+  - path: output/emirge/SUCCESS_step4_emirge
+    md5sum: f9f602446da0bd0e9eebfba3d3db9d5e
